@@ -1,9 +1,0 @@
-controller/main.o
-controller/utilities/GridUtils.o
-controller/player/Player.o
-controller/inventory/Ammo.o
-controller/inventory/Storage.o
-controller/enemy/Dragon.o
-controller/enemy/Enemy.o
-.vscode
-.history
