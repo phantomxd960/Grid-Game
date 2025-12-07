@@ -1,4 +1,3 @@
-SHORT README VERSION (copy into README.md)
 🔧 Project Setup Instructions
 1. Install Dependencies
 
