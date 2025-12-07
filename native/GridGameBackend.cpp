@@ -1,7 +1,8 @@
 #include <vector>
 #include <queue>
 #include <utility>
-#include "src_GridGameBackendJNI.h"
+#include "src_GridGameGUI.h"
+
 
 #define GRID_SIZE 10
 #define INF 1000000
