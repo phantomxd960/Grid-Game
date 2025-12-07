@@ -2,7 +2,6 @@
 
 ---
 
-#Grid Game with JNI & C++ Backend**
 
 ## **Project Title**
 
@@ -139,17 +138,16 @@ export LD_LIBRARY_PATH=$PWD/native
 java -cp bin src.FinalBaseFrontend
 ```
 
-A Swing GUI window will appear.
-
 ---
 
 # **How the Game Works**
 
 * **Player** moves using the UI buttons (Up/Down/Left/Right)
-* **Enemy** chases the player using **BFS shortest path** (in C++)
+* **Enemy** chases the player using **Dijsktra Algorithm for shortest path** (in C++)
 * Random **walls** are generated each game
-* Anti-pattern: if a player repeats the same move 4 times, enemy moves unpredictably
 * Game ends when the enemy reaches the player
+* depending on the number of moves you get coins and build structures to reach various town hall levels.
+* on reaching town hall level 5 you fight the dragon battle.
 
 ---
 
