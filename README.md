@@ -119,7 +119,7 @@ g++ -fPIC -shared -o libGridGameBackend.so \
     -I"$JAVA_HOME/include" \
     -I"$JAVA_HOME/include/linux" \
     GridGameBackend.cpp
-
+do it for all native files
 cd ..
 ```
 
@@ -127,6 +127,8 @@ This creates:
 
 ```
 native/libGridGameBackend.so
+native/libDragonGameBackend.so
+native/libBaseBackend.so
 ```
 
 ---
