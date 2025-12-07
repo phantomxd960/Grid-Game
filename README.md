@@ -71,7 +71,3 @@ cd build
 ./runTests
 This executes all GoogleTest suites included in the project.
 
-
-
-
-Enemy moves closer every turn (BFS sh
