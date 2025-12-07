@@ -1,4 +1,4 @@
-The setup is completed and a video with clean installation has been attached.
+The setup is completed.
 
 The clean_files is the folder without building anything
 
