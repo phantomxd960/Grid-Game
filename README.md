@@ -24,7 +24,7 @@ This project implements a **grid-based game** where:
 * Random wall generation with guaranteed path availability
 * Detection of repetitive player movement patterns
 * Modular, clean C++ backend logic
-* GoogleTest-based unit testing for backend modules
+* GoogleTest-based unit testing for core game logic.
 
 ---
 
