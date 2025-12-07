@@ -1,26 +1,78 @@
-The setup is completed.
+SHORT README VERSION (copy into README.md)
+🔧 Project Setup Instructions
+1. Install Dependencies
 
-The clean_files is the folder without building anything
+Make sure you have the following installed:
 
-Setps to build :
-1. Create a bin folder using the below command in the root folder\
-`mkdir bin`
-2. Generate header files for the JNI files from the *src* directory\
-    `cd src`\
-    `javac -h ../native BaseBackendJNI.java`\
-    `javac -h ../native GridGameBackendJNI.java`
-3. Navigate to the `native/` folder and compile the C++ files into shared libraries:\
-`cd ../native`\
-`g++ -shared -o BaseBackend.dll -I"%JAVA_HOME%\include" -I"%JAVA_HOME%\include\win32" BaseBackend.cpp`\
-`g++ -shared -o GridGameBackend.dll -I"%JAVA_HOME%\include" -I"%JAVA_HOME%\include\win32" GridGameBackend.cpp`
-`g++ -shared -o DragonGameBackend.dll -I"%JAVA_HOME%\include" -I"%JAVA_HOME%\include\win32" DragonGameBackend.cpp`
-4. Navigate to the root folder and compile the java files into class files:\
-`javac -d bin src/*.java`
+g++ (C++ compiler)
 
-5. navigate to the root folder and run the file with path to native libraries\
-`java -Djava.library.path=native -cp bin src.FinalBaseFrontend`
+JDK 23 (both java and javac)
+
+Swing (included in standard JDK)
+
+Linux (project tested on Ubuntu)
+
+Check installations:
+
+java -version
+javac -version
+g++ --version
 
 
+Both java and javac should show version 23.0.x.
+
+2. Clone the Repository
+git clone <YOUR_REPO_LINK>
+cd final_java_cpp_project
+
+3. Set JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1-oracle-x64
+
+4. Compile Java Sources
+rm -rf bin
+mkdir bin
+javac -h native -d bin src/*.java
 
 
-C:\Program Files\Java\jdk-20
+This:
+
+Compiles .java files
+
+Generates JNI header files inside native/
+
+5. Compile Native C++ Code (.so file)
+
+Move into the native folder:
+
+cd native
+g++ -fPIC -shared -o libGridGameBackend.so \
+    -I"$JAVA_HOME/include" \
+    -I"$JAVA_HOME/include/linux" \
+    GridGameBackend.cpp
+cd ..
+
+6. Run the Project
+export LD_LIBRARY_PATH=$PWD/native
+java -cp bin src.FinalBaseFrontend
+
+
+The GUI will launch automatically.
+
+🧪 Testing Instructions
+sudo apt install cmake
+
+Commands to Run Tests:
+
+sudo apt update
+sudo apt install g++ cmake git
+
+cd tests
+cmake --build build
+cd build
+./runTests
+This executes all GoogleTest suites included in the project.
+
+
+
+
+Enemy moves closer every turn (BFS sh
