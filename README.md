@@ -19,7 +19,7 @@ This project implements a **grid-based game** where:
 
 ### **Key Features**
 
-* BFS-based enemy movement algorithm written in C++
+* Dijkstra Algo based enemy movement algorithm written in C++
 * Java Swing GUI for real-time interaction
 * Random wall generation with guaranteed path availability
 * Detection of repetitive player movement patterns
