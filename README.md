@@ -1,65 +1,176 @@
-# GridHero
 
-The Grid Hero is a strategic pathfinding game where the player must navigate through a
-grid, avoiding an enemy that dynamically finds the shortest path to capture them. The
-player's goal is to collect gold coins on the grid before being caught by the enemy. These
-coins are used to progress through three levels of increasing difficulty and use them in the
-final boss battle.Once the two levels are completed, the player engages in a final battle with
-a dragon, marking the end of the game.
 
-## Instructions
+---
 
-Instructions to compile and run the code:
 
-**Step 1. Clone the Repository.**
+## **Project Title**
 
-**Step 2. The structure of Repository should like this:**
+**Grid Game with Java Swing UI and C++ Backend via JNI**
 
-        GridHero
-        |
-        |--cli
-        |__controller
+---
 
-**Step 3: Compile and Build Backend (C++)**
+## 📖 **Project Overview**
 
-1. Command: cd controller
+This project implements a **grid-based game** where:
 
-2. Command:
+* The **UI is developed in Java Swing**
+* The **backend logic (enemy movement)** is implemented in **C++**
+* Java and C++ communicate using **JNI (Java Native Interface)**
 
-g++ -std=c++17 -o game player/Player.cpp enemy/Enemy.cpp enemy/Dragon.cpp Game.cpp main.cpp inventory/Ammo.cpp inventory/Storage.cpp
+### **Key Features**
 
-3. Command:
+* Dijkstra Algo based enemy movement algorithm written in C++
+* Java Swing GUI for real-time interaction
+* Random wall generation with guaranteed path availability
+* Detection of repetitive player movement patterns
+* Modular, clean C++ backend logic
+* GoogleTest-based unit testing for core game logic.
 
-For linux:
+---
 
-g++ -std=c++17 -shared -fPIC -o libgamebackend.so main.cpp
-player/Player.cpp enemy/Enemy.cpp enemy/Dragon.cpp Game.cpp
-inventory/Ammo.cpp inventory/Storage.cpp
+## **Project Structure**
 
-For macOS:
+```
+final_java_cpp_project/
+│
+├── src/                     # Java sources
+│   ├── GridGameGUI.java
+│   ├── FinalBaseFrontend.java
+│   └── ...
+│
+├── native/                  # C++ code + JNI headers + .so file
+│   ├── GridGameBackend.cpp
+│   ├── src_GridGameGUI.h
+│   ├── libGridGameBackend.so
+│   └── ...
+│
+├── tests/                   # GoogleTest-based testing framework
+│   ├── CMakeLists.txt
+│   ├── test_main.cpp
+│   ├── test_basebackend.cpp
+│   ├── test_gridgame.cpp
+│   └── ...
+│
+├── images/                  # Icons for the game GUI
+│
+└── README.md
+```
 
-g++ -std=c++17 -shared -fPIC -o libgamebackend.dylib main.cpp
-player/Player.cpp enemy/Enemy.cpp enemy/Dragon.cpp Game.cpp
-inventory/Ammo.cpp inventory/Storage.cpp
+---
 
-For Windows:
+#**Project Setup Instructions**
 
-g++ -std=c++17 -shared -fPIC -o libgamebackend.dll main.cpp
-player/Player.cpp enemy/Enemy.cpp enemy/Dragon.cpp Game.cpp
-inventory/Ammo.cpp inventory/Storage.cpp
+## **1. Install Dependencies**
 
-4. Move this file to cli. The path of the file should be: ../GridHero/cli/libgamebackend.dylib/.so/.dll (same as Frontend.java)
+```bash
+sudo apt update
+sudo apt install g++ cmake git
+```
 
-**Step 4: Set Up Frontend**
+Install JDK 23:
 
-1. Command: cd cli
+```bash
+java -version
+javac -version
+```
 
-2. Command: javac Frontend.java
+Both must show **23.x**.
 
-**Step 5: To run the program**
+---
 
-1. cd GridHero/cli
+## **2. Clone the Repository**
 
-2. java -Djava.library.path=. Frontend
+```bash
+git clone <REPO_LINK>
+cd final_java_cpp_project
+```
 
-**This will run the program in your terminal.**
+---
+
+## **3. Set JAVA_HOME**
+
+```bash
+export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1-oracle-x64
+```
+
+---
+
+## **4. Compile Java & Generate JNI Headers**
+
+```bash
+rm -rf bin
+mkdir bin
+javac -h native -d bin src/*.java
+```
+
+This generates:
+
+* `.class` files → `bin/`
+* `.h` JNI headers → `native/`
+
+---
+
+## **5. Compile Native C++ Backend (.so file)**
+
+```bash
+cd native
+
+g++ -fPIC -shared -o libGridGameBackend.so \
+    -I"$JAVA_HOME/include" \
+    -I"$JAVA_HOME/include/linux" \
+    GridGameBackend.cpp
+do it for all native files
+cd ..
+```
+
+This creates:
+
+```
+native/libGridGameBackend.so
+native/libDragonGameBackend.so
+native/libBaseBackend.so
+```
+
+---
+
+## **6. Run the Project**
+
+```bash
+export LD_LIBRARY_PATH=$PWD/native
+java -cp bin src.FinalBaseFrontend
+```
+
+---
+
+# **How the Game Works**
+
+* **Player** moves using the UI buttons (Up/Down/Left/Right)
+* **Enemy** chases the player using **Dijsktra Algorithm for shortest path** (in C++)
+* Random **walls** are generated each game
+* Game ends when the enemy reaches the player
+* depending on the number of moves you get coins and build structures to reach various town hall levels.
+* on reaching town hall level 5 you fight the dragon battle.
+
+---
+
+# **Testing Instructions (GoogleTest)**
+
+## **1. Install CMake**
+
+```bash
+sudo apt install cmake
+```
+
+---
+
+## **2. Build and Run Tests**
+
+```bash
+cd tests
+mkdir build
+cmake -S . -B build
+cmake --build build
+cd build
+./runTests
+```
+
